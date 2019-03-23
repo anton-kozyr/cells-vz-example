@@ -1,0 +1,23 @@
+@ /gui root:gui {
+  #%praxis.version 4.1.1
+  @ ./button1 gui:button {
+    .label "B&W"
+    .binding /video/bw/control.activate
+    .layout "cell 0 0"
+  }
+  @ ./button2 gui:button {
+    .label Clouds
+    .binding /video/clouds/control.activate
+    .layout "cell 1 0"
+  }
+  @ ./button3 gui:button {
+    .label Colours
+    .binding /video/colours/control.activate
+    .layout "cell 2 0"
+  }
+  @ ./button4 gui:button {
+    .label Videos
+    .binding /video/videos/control.activate
+    .layout "cell 3 0"
+  }
+}

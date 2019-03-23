@@ -1,0 +1,246 @@
+@ /triggers root:data {
+  #%praxis.version 4.1.1
+  #%graph.comment Patch for triggering events.\nThis can be replaced with FFT, tapping, or OSC input.\n\nTrigger events (pings) are sent to voronoi-generator,\nto trigger cells movement, and and to all scenes,\nwhere they are processed depending on the scene.
+  @ ./ping-0 core:routing:send {
+    #%graph.x 998
+    #%graph.y 23
+    .address /video/ping-control.ping-0-in
+  }
+  @ ./ping-1 core:routing:send {
+    #%graph.x 1452
+    #%graph.y 218
+    .address /video/ping-control.ping-1-in
+  }
+  @ ./ping-2 core:routing:send {
+    #%graph.x 998
+    #%graph.y 411
+    .address /video/ping-control.ping-2-in
+  }
+  @ ./bw-0 core:routing:send {
+    #%graph.x 998
+    #%graph.y 73
+    .address /video/bw/ping-control.ping-0-in
+  }
+  @ ./bw-1 core:routing:send {
+    #%graph.x 1452
+    #%graph.y 268
+    .address /video/bw/ping-control.ping-1-in
+  }
+  @ ./bw-2 core:routing:send {
+    #%graph.x 998
+    #%graph.y 461
+    .address /video/bw/ping-control.ping-2-in
+  }
+  @ ./clouds-0 core:routing:send {
+    #%graph.x 998
+    #%graph.y 123
+    .address /video/clouds/ping-control.ping-0-in
+  }
+  @ ./clouds-1 core:routing:send {
+    #%graph.x 1452
+    #%graph.y 318
+    .address /video/clouds/ping-control.ping-1-in
+  }
+  @ ./clouds-2 core:routing:send {
+    #%graph.x 998
+    #%graph.y 511
+    .address /video/clouds/ping-control.ping-2-in
+  }
+  @ ./colours-0 core:routing:send {
+    #%graph.x 998
+    #%graph.y 173
+    .address /video/colours/ping-control.ping-0-in
+  }
+  @ ./colours-1 core:routing:send {
+    #%graph.x 1452
+    #%graph.y 368
+    .address /video/colours/ping-control.ping-1-in
+  }
+  @ ./colours-2 core:routing:send {
+    #%graph.x 998
+    #%graph.y 561
+    .address /video/colours/ping-control.ping-2-in
+  }
+  @ ./videos-0 core:routing:send {
+    #%graph.x 998
+    #%graph.y 223
+    .address /video/videos/ping-control.ping-0-in
+  }
+  @ ./videos-1 core:routing:send {
+    #%graph.x 1452
+    #%graph.y 418
+    .address /video/videos/ping-control.ping-1-in
+  }
+  @ ./videos-2 core:routing:send {
+    #%graph.x 998
+    #%graph.y 611
+    .address /video/videos/ping-control.ping-2-in
+  }
+  @ ./timer core:timing:timer {
+    #%graph.x 196
+    #%graph.y 243
+    .period .7
+  }
+  @ ./trigger-splitter-0 core:custom {
+    #%graph.x 505
+    #%graph.y 73
+    .code "
+
+    @P(0)
+    @Type.Number(def = 0)
+    @ReadOnly
+    Property counter;
+
+    @Out(3)
+    Output out1Of4;
+
+    @Out(4)
+    Output out2Of4;
+
+    @Out(5)
+    Output out3Of4;
+
+    @Out(6)
+    Output out4Of4;
+
+    @Override
+    public void init() \{
+        counter.set(0);
+    \}
+
+    @T(0)
+    void trigger() \{
+        int count = i(counter);
+        counter.set((count + 1) % 4);
+        switch (count) \{
+            case 0:
+                out1Of4.send();
+                break;
+            case 1:
+                out2Of4.send();
+                break;
+            case 2:
+                out3Of4.send();
+                break;
+            case 3:
+                out4Of4.send();
+                break;
+        \}
+    \}
+"
+  }
+  @ ./trigger-splitter-1 core:custom {
+    #%graph.x 505
+    #%graph.y 242
+    .code "
+
+    @P(0)
+    @Type.Number(def = 0)
+    @ReadOnly
+    Property counter;
+
+    @Out(3)
+    Output out1Of4;
+
+    @Out(4)
+    Output out2Of4;
+
+    @Out(5)
+    Output out3Of4;
+
+    @Out(6)
+    Output out4Of4;
+
+    @Override
+    public void init() \{
+        counter.set(0);
+    \}
+
+    @T(0)
+    void trigger() \{
+        int count = i(counter);
+        counter.set((count + 1) % 4);
+        switch (count) \{
+            case 0:
+                out1Of4.send();
+                break;
+            case 1:
+                out2Of4.send();
+                break;
+            case 2:
+                out3Of4.send();
+                break;
+            case 3:
+                out4Of4.send();
+                break;
+        \}
+    \}
+"
+  }
+  @ ./trigger-splitter-2 core:custom {
+    #%graph.x 505
+    #%graph.y 415
+    .code "
+
+    @P(0)
+    @Type.Number(def = 0)
+    @ReadOnly
+    Property counter;
+
+    @Out(3)
+    Output out1Of4;
+
+    @Out(4)
+    Output out2Of4;
+
+    @Out(5)
+    Output out3Of4;
+
+    @Out(6)
+    Output out4Of4;
+
+    @Override
+    public void init() \{
+        counter.set(0);
+    \}
+
+    @T(0)
+    void trigger() \{
+        int count = i(counter);
+        counter.set((count + 1) % 4);
+        switch (count) \{
+            case 0:
+                out1Of4.send();
+                break;
+            case 1:
+                out2Of4.send();
+                break;
+            case 2:
+                out3Of4.send();
+                break;
+            case 3:
+                out4Of4.send();
+                break;
+        \}
+    \}
+"
+  }
+  ~ ./trigger-splitter-0!out-1-of-4 ./ping-0!in
+  ~ ./trigger-splitter-0!out-1-of-4 ./bw-0!in
+  ~ ./trigger-splitter-0!out-1-of-4 ./clouds-0!in
+  ~ ./trigger-splitter-0!out-1-of-4 ./colours-0!in
+  ~ ./trigger-splitter-0!out-1-of-4 ./videos-0!in
+  ~ ./trigger-splitter-1!out-2-of-4 ./ping-1!in
+  ~ ./trigger-splitter-1!out-2-of-4 ./bw-1!in
+  ~ ./trigger-splitter-1!out-2-of-4 ./clouds-1!in
+  ~ ./trigger-splitter-1!out-2-of-4 ./colours-1!in
+  ~ ./trigger-splitter-1!out-2-of-4 ./videos-1!in
+  ~ ./timer!out ./trigger-splitter-0!trigger
+  ~ ./timer!out ./trigger-splitter-1!trigger
+  ~ ./timer!out ./trigger-splitter-2!trigger
+  ~ ./trigger-splitter-2!out-3-of-4 ./colours-2!in
+  ~ ./trigger-splitter-2!out-3-of-4 ./clouds-2!in
+  ~ ./trigger-splitter-2!out-3-of-4 ./bw-2!in
+  ~ ./trigger-splitter-2!out-3-of-4 ./ping-2!in
+  ~ ./trigger-splitter-2!out-3-of-4 ./videos-2!in
+}
